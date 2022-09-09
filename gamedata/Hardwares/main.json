@@ -1,0 +1,9 @@
+[
+    {
+        "id" : 0,
+        "name": "Crab",
+        "desc": "Crab",
+        "price": 100,
+        "manufacturer": 0
+    }
+]

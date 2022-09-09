@@ -1,7 +1,7 @@
 use std::ops;
 
 #[derive(Copy, Clone)]
-pub(crate) struct BeegNum {
+pub struct BeegNum {
     pub value: u128,
     pub shift: u128
 }

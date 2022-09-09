@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use crate::types as types;
+use crate::types::nums::*;
 
 /*
 
@@ -12,10 +12,21 @@ A struct that holds all data related to the player, inluding but not limited to
 */
 pub struct Player {
 
-    bits : u128, // the player's bits! Uses the optimized struct
+    pub balance : BeegNum, // the player's balance! Uses the optimized struct
 
-    upgrades : HashMap<u64, u64>, // A hashmap telling us all of the player's upgrades.
+    pub upgrades : HashMap<u64, u64>, // A hashmap telling us all of the player's upgrades.
 
-    // The first u8 the global id of the upgrade, the second one is how upgraded it is.
+    // The first u64 the global id of the upgrade, the second one is how upgraded it is.
 
+    pub currhardware : u128 // The current hardware item id that we are on
+
+}
+
+
+impl Player {
+
+    // Creates a blank player
+    pub fn blank() -> Player {
+        Player { balance: BeegNum { value: 0, shift: 0 }, upgrades: HashMap::new(), currhardware: 0 }
+    }
 }
