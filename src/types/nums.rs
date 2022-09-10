@@ -116,11 +116,11 @@ impl Eq for BeegNum {}
 impl PartialOrd<BeegNum> for BeegNum {
     fn partial_cmp(&self, other: &BeegNum) -> Option<Ordering> {
         return Option::from(if self.lt(&other) {
-            Ordering::Less
+            Some(Ordering::Less)
         } else if self.eq(other) {
-            Ordering::Equal
+            Some(Ordering::Equal)
         } else if self.gt(&other) {
-            Ordering::Greater
+            Some(Ordering::Greater)
         } else {
             None
         })
