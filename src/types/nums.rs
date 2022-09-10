@@ -17,11 +17,11 @@ impl BeegNum {
     }
 
     pub fn truncate(self) -> BeegNum {
-        let to_truncate = self.value.leading_zeros();
+        let to_truncate = self.value.leading_zeros() as u128;
 
-        if self.value == 0 {BeegNum::new(0, 0)}
-
-        return if self.shift >= to_truncate as u128 {
+        return if self.value == 0 {
+            BeegNum::new(0, 0)
+        } else if self.shift >= to_truncate {
             BeegNum::new(self.value << to_truncate, self.shift - to_truncate)
         } else {
             BeegNum::new(self.value << self.shift, 0)
@@ -119,8 +119,10 @@ impl PartialOrd<BeegNum> for BeegNum {
             Ordering::Less
         } else if self.eq(other) {
             Ordering::Equal
-        }else if self.gt(&other) {
+        } else if self.gt(&other) {
             Ordering::Greater
+        } else {
+            None
         })
     }
 
