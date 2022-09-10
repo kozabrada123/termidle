@@ -1,7 +1,37 @@
 [
     {
         "id" : 0,
-        "name": "Rustacean Inc.",
-        "desc": "Crab manufacturer"
+        "name": "SCE",
+        "desc": "Scientific Data Electronics"
+    },
+    {
+        "id" : 1,
+        "name": "IMB",
+        "desc": "Internation Machines Business"
+    },
+    {
+        "id" : 2,
+        "name": "DCC",
+        "desc": "Data Control Corporation"
+    },
+    {
+        "id" : 3,
+        "name": "Honeypit",
+        "desc": ""
+    },
+    {
+        "id" : 4,
+        "name": "Catari",
+        "desc": ""
+    },
+    {
+        "id" : 5,
+        "name": "Apfel",
+        "desc": ""
+    },
+    {
+        "id" : 6,
+        "name": "Codommore",
+        "desc": ""
     }
 ]

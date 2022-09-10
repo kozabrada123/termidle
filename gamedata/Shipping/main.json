@@ -1,0 +1,32 @@
+[
+    {
+        "id" : 0,
+        "name": "Bicycle",
+        "capacity" : 10,
+        "price": 50
+    },
+    {
+        "id" : 0,
+        "name": "Small Car",
+        "capacity" : 50,
+        "price": 250
+    },
+    {
+        "id" : 0,
+        "name": "Pickup",
+        "capacity" : 250,
+        "price": 1250
+    },
+    {
+        "id" : 0,
+        "name": "Truck",
+        "capacity" : 1250,
+        "price": 6250
+    },
+    {
+        "id" : 0,
+        "name": "Bus",
+        "capacity" : 6250,
+        "price": 31250
+    }
+]

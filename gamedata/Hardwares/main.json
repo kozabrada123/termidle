@@ -1,9 +1,44 @@
 [
     {
         "id" : 0,
-        "name": "Crab",
-        "desc": "Crab",
-        "price": 100,
+        "name": "IMB 7070",
+        "desc": "A Classic IMB Computer utulizing transistors",
+        "price": 5,
+        "manufacturer": 1
+    },
+    {
+        "id" : 1,
+        "name": "DCC 3600",
+        "desc": "A DCC Computer straight from 1963",
+        "price": 15,
         "manufacturer": 0
+    },
+    {
+        "id" : 2,
+        "name": "Honeypit 316",
+        "desc": "A popular 16 bit computer from 1969",
+        "price": 45,
+        "manufacturer": 0
+    },
+    {
+        "id" : 3,
+         "name": "Apfel ][",
+         "desc": "A popular 8 bit computer by Apfel. Made in 1977",
+         "price": 135,
+         "manufacturer": 0
+    },
+    {
+        "id" : 4,
+         "name": "Codommore 64",
+         "desc": "Highest selling computer of all time. 1982.",
+         "price": 405,
+         "manufacturer": 0
+    },
+    {
+        "id" : 5,
+         "name": "Apfel iMac",
+         "desc": "1998. Apfel. All in one computing.",
+         "price": 1215,
+         "manufacturer": 0
     }
 ]

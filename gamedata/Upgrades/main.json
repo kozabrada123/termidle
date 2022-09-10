@@ -2,21 +2,39 @@
     [
         {
             "id" : 0,
-            "name": "Test",
-            "desc": "Increases speed by 10%",
+            "name": "Robot Arms",
+            "desc": "Increases manufacturing speed by 15%",
             "function": 1,
-            "multiplier": 0.1,
-            "tiers": 1,
-            "base_cost": 0.5
+            "multiplier": 0.15,
+            "tiers": 20,
+            "base_cost": 1
         },
         {
             "id" : 1,
-            "name": "Test",
-            "desc": "Increases speed by 10%",
-            "function": 1,
-            "multiplier": 0.1,
-            "tiers": 1,
-            "base_cost": 0.5
+            "name": "Better Parts",
+            "desc": "Increases price by 25%",
+            "function": 2,
+            "multiplier": 0.25,
+            "tiers": 20,
+            "base_cost": 1
+        },
+        {
+            "id" : 2,
+            "name": "Chararismatic Salesmen",
+            "desc": "Manufacturers will give you 5% better deals",
+            "function": 2,
+            "multiplier": 0.05,
+            "tiers": 10,
+            "base_cost": 2
+        },
+        {
+            "id" : 3,
+            "name": "",
+            "desc": "Manufacturers will give you 5% better deals",
+            "function": 2,
+            "multiplier": 0.05,
+            "tiers": 10,
+            "base_cost": 2
         }
     ]
 ]

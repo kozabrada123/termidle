@@ -6,6 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-num-bigint = "0.4.3"
+tui = "0.19"
+crossterm = "0.25"
+unicode-width = "0.1.9"
+
 serde = {version="1.0.144",  features = ["derive"]}
 serde_json =  {version="1.0.85"}

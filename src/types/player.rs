@@ -14,9 +14,9 @@ pub struct Player {
 
     pub balance : BeegNum, // the player's balance! Uses the optimized struct
 
-    pub upgrades : HashMap<u64, u64>, // A hashmap telling us all of the player's upgrades.
+    pub upgrades : HashMap<u64, u8>, // A hashmap telling us all of the player's upgrades.
 
-    // The first u64 the global id of the upgrade, the second one is how upgraded it is.
+    // The first u64 the global id of the upgrade, the u8 is how upgraded it is.
 
     pub currhardware : u128 // The current hardware item id that we are on
 
