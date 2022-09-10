@@ -115,7 +115,7 @@ impl Eq for BeegNum {}
 
 impl PartialOrd<BeegNum> for BeegNum {
     fn partial_cmp(&self, other: &BeegNum) -> Option<Ordering> {
-        return Option::from(if self.lt(&other) {
+        return if self.lt(&other) {
             Some(Ordering::Less)
         } else if self.eq(other) {
             Some(Ordering::Equal)
@@ -123,7 +123,7 @@ impl PartialOrd<BeegNum> for BeegNum {
             Some(Ordering::Greater)
         } else {
             None
-        })
+        }
     }
 
     fn lt(&self, other: &BeegNum) -> bool {
