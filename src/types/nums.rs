@@ -1,4 +1,5 @@
-use std::ops;
+use std::{cmp, ops};
+use std::cmp::Ordering;
 
 #[derive(Copy, Clone)]
 pub struct BeegNum {
@@ -15,15 +16,56 @@ impl BeegNum {
         }
     }
 
+    pub fn truncate(self) -> BeegNum {
+        let to_truncate = self.value.leading_zeros();
+
+        if self.value == 0 {BeegNum::new(0, 0)}
+
+        return if self.shift >= to_truncate as u128 {
+            BeegNum::new(self.value << to_truncate, self.shift - to_truncate)
+        } else {
+            BeegNum::new(self.value << self.shift, 0)
+        }
+    }
+
     pub fn add(self, other: BeegNum) -> BeegNum {
         let shift_o = self.shift.saturating_sub(other.shift);
         let shift_s = other.shift.saturating_sub(self.shift);
+
+        if shift_o > 127 {return self}
+        if shift_s > 127 {return other}
 
         return if let Some(new) = (self.value >> shift_s).checked_add(other.value >> shift_o) {
             BeegNum::new(new, self.shift + shift_s + shift_o)
         } else {
             BeegNum::new((self.value >> (1 + shift_s)) + (other.value >> (1 + shift_o)), self.shift + 1 + shift_s + shift_o)
         }
+    }
+
+    pub fn sub(self, other: BeegNum) -> BeegNum {
+        let shift_o = self.shift.saturating_sub(other.shift);
+
+        if shift_o > 127 {return self}
+
+        BeegNum::new(self.value.saturating_sub(other.value >> shift_o), self.shift)
+    }
+
+    pub fn eq(self, other: BeegNum) -> bool {
+        let tr_self = self.truncate();
+        let tr_other = other.truncate();
+        tr_self.value == tr_other.value && tr_self.shift == tr_other.shift
+    }
+
+    pub fn lt(self, other: BeegNum) -> bool {
+        let tr_self = self.truncate();
+        let tr_other = other.truncate();
+        (tr_self.shift == tr_other.shift && tr_self.value < tr_other.value) || (tr_self.shift < tr_other.shift)
+    }
+
+    pub fn gt(self, other: BeegNum) -> bool {
+        let tr_self = self.truncate();
+        let tr_other = other.truncate();
+        (tr_self.shift == tr_other.shift && tr_self.value > tr_other.value) || (tr_self.shift > tr_other.shift)
     }
 }
 
@@ -43,43 +85,58 @@ impl ops::AddAssign<BeegNum> for BeegNum {
     }
 }
 
-#[derive(Copy, Clone)]
-pub(crate) struct LittlNum {
-    pub value: u8,
-    pub shift: u8
-}
+impl ops::Sub<BeegNum> for BeegNum {
+    type Output = BeegNum;
 
-impl LittlNum {
-    pub fn new(value: u8, shift: u8) -> LittlNum {
-        LittlNum {
-            value,shift
-        }
-    }
-
-    pub fn add(self, other: LittlNum) -> LittlNum {
-        let shift_o = self.shift.saturating_sub(other.shift);
-        let shift_s = other.shift.saturating_sub(self.shift);
-
-        return if let Some(new) = (self.value >> shift_s).checked_add(other.value >> shift_o) {
-            LittlNum::new(new, self.shift + shift_s + shift_o)
-        } else {
-            LittlNum::new((self.value >> (1 + shift_s)) + (other.value >> (1 + shift_o)), self.shift + 1 + shift_s + shift_o)
-        }
+    fn sub(self, rhs: BeegNum) -> Self::Output {
+        self.sub(rhs)
     }
 }
 
-impl ops::Add<LittlNum> for LittlNum {
-    type Output = LittlNum;
-
-    fn add(self, rhs: LittlNum) -> Self::Output {
-        self.add(rhs)
-    }
-}
-
-impl ops::AddAssign<LittlNum> for LittlNum {
-    fn add_assign(&mut self, rhs: LittlNum) {
-        let tmp = self.add(rhs);
+impl ops::SubAssign<BeegNum> for BeegNum {
+    fn sub_assign(&mut self, rhs: BeegNum) {
+        let tmp = self.sub(rhs);
         self.value = tmp.value;
         self.shift = tmp.shift;
+    }
+}
+
+impl PartialEq<BeegNum> for BeegNum {
+    fn eq(&self, other: &BeegNum) -> bool {
+        self.eq(other)
+    }
+
+    fn ne(&self, other: &BeegNum) -> bool {
+        !self.eq(other)
+    }
+}
+
+impl Eq for BeegNum {}
+
+impl PartialOrd<BeegNum> for BeegNum {
+    fn partial_cmp(&self, other: &BeegNum) -> Option<Ordering> {
+        return Option::from(if self.lt(&other) {
+            Ordering::Less
+        } else if self.eq(other) {
+            Ordering::Equal
+        }else if self.gt(&other) {
+            Ordering::Greater
+        })
+    }
+
+    fn lt(&self, other: &BeegNum) -> bool {
+        self.lt(&other)
+    }
+
+    fn le(&self, other: &BeegNum) -> bool {
+        self.lt(&other) || self.eq(other)
+    }
+
+    fn gt(&self, other: &BeegNum) -> bool {
+        self.gt(&other)
+    }
+
+    fn ge(&self, other: &BeegNum) -> bool {
+        self.gt(&other) || self.eq(other)
     }
 }
