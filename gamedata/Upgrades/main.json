@@ -24,17 +24,28 @@
             "desc": "Manufacturers will give you 5% better deals",
             "function": 2,
             "multiplier": 0.05,
-            "tiers": 10,
+            "tiers": 2,
             "base_cost": 2
-        },
+        }
+    ],
+    [
         {
             "id" : 3,
-            "name": "",
-            "desc": "Manufacturers will give you 5% better deals",
-            "function": 2,
-            "multiplier": 0.05,
-            "tiers": 10,
-            "base_cost": 2
+            "name": "Better Bits",
+            "desc": "Increases earnings by a further 25%",
+            "function": 1,
+            "multiplier": 0.25,
+            "tiers": 30,
+            "base_cost": 5
+        },
+        {
+            "id" : 4,
+            "name": "Rgb Lighting",
+            "desc": "Doubles Computer Value",
+            "function": 1,
+            "multiplier": 1.0,
+            "tiers": 1,
+            "base_cost": 12500
         }
     ]
 ]

@@ -12,13 +12,6 @@ pub struct GameStruct {
     pub vehicles : Vec<Vehicle>,
 }
 
-// For canbuy
-pub enum GameItemType {
-    HardwareItem,
-    Manufacturer,
-    Upgrade,
-    Vehicle
-}
 
 impl GameStruct {
 
@@ -145,7 +138,7 @@ impl GameStruct {
             // We can
 
             // Buy it
-            self.player.balance.value -= canbuy.1;
+            self.player.balance -= BeegNum{value: canbuy.1, shift: 0};
 
             // Add it to the player's upgrade list
             self.player.upgrades.insert(tobuy.id, canbuy.2);
@@ -191,7 +184,7 @@ impl GameStruct {
         let mut data = "".to_string();
 
         // Try all the folders
-        match std::fs::read_to_string("./gamedaa/Manufacturers/main.json") {
+        match std::fs::read_to_string("./gamedata/Manufacturers/main.json") {
             Ok(fdata) => {data = fdata;},
             Err(_e) => {} //println!("Couldn't read ./gamedata/ ..")
         }
@@ -218,7 +211,7 @@ impl GameStruct {
         let mut data = "".to_string();
 
         // Try all the folders
-        match std::fs::read_to_string("./gamedaa/Shipping/main.json") {
+        match std::fs::read_to_string("./gamedata/Shipping/main.json") {
             Ok(fdata) => {data = fdata;},
             Err(_e) => {} //println!("Couldn't read ./gamedata/ ..")
         }
@@ -246,7 +239,7 @@ impl GameStruct {
         let mut data = "".to_string();
 
         // Try all the folders
-        match std::fs::read_to_string("./gamedaa/Upgrades/main.json") {
+        match std::fs::read_to_string("./gamedata/Upgrades/main.json") {
             Ok(fdata) => {data = fdata;},
             Err(_e) => {} //println!("Couldn't read ./gamedata/ ..")
         }
@@ -328,6 +321,24 @@ impl GameStruct {
         
     }*/
     
+
+    // Simple function that gets all the upgrades in vec so we can work with them easier
+    pub fn get_all_upgrades() -> Vec<Upgrade> {
+
+
+        let game = GameStruct::blank();
+
+        let mut all = Vec::<Upgrade>::new();
+
+        // Just iterate through all the upgrade tier
+        for tier in game.upgrades.clone() {
+            for upgrade in tier {
+                all.push(upgrade.clone());
+            }
+        }
+
+        return all;
+    }
 
     // Test funcs
     pub fn blank() -> GameStruct {
